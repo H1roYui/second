@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Driver Academy - 自駕小車控制台</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="dashboard-grid">
+        <!-- 第 1 格：即時串流與車道辨識視覺化 -->
+        <div class="card grid-video">
+            <h3>📷 車載視訊與車道線偵測 (HSV 強化)</h3>
+            <div class="video-box">
+                <img src="{{ url_for('video_feed') }}" alt="即時串流中...">
+            </div>
+        </div>
+
+        <!-- 第 2 格：自駕控制儀表板 -->
+        <div class="card grid-status">
+            <h3>⚙️ 自駕系統與狀態監控</h3>
+            <div class="status-content">
+                <p>自駕狀態：<span id="auto-status-text" class="status-off">手動模式 (Manual)</span></p>
+                <button id="btn-toggle-auto" class="btn auto-btn">🚀 啟動自駕巡線</button>
+                <div class="offset-display">
+                    <p>車道中心偏移量 (Offset)：<span id="offset-val">0.0</span> px</p>
+                    <div class="offset-bar-bg">
+                        <div id="offset-bar-indicator"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第 3 格：手動控制面板 (置底延展) -->
+        <div class="card grid-controls" style="grid-column: 1 / -1;">
+            <h3>🚗 車體移動 (按住移動) & 鏡頭控制</h3>
+            <div class="controls-container">
+                <div class="sub-panel">
+                    <h4>車體控制 (WASD)</h4>
+                    <button class="btn" id="btn-up">⬆ 前進</button>
+                    <div class="horizontal">
+                        <button class="btn" id="btn-left">⬅ 左轉</button>
+                        <button class="btn" id="btn-right">➡ 右轉</button>
+                    </div>
+                    <button class="btn" id="btn-down">⬇ 後退</button>
+                </div>
+                <div class="sub-panel">
+                    <h4>鏡頭雲台 (方向鍵)</h4>
+                    <button class="btn cam-btn" id="cam-up">🔼 仰角</button>
+                    <div class="horizontal">
+                        <button class="btn cam-btn" id="cam-left">◀ 視角左</button>
+                        <button class="btn cam-center" id="cam-center">🎯 歸位</button>
+                        <button class="btn cam-btn" id="cam-right">▶ 視角右</button>
+                    </div>
+                    <button class="btn cam-btn" id="cam-down">🔽 俯角</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
